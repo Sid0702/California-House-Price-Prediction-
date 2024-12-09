@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>California House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            text-align: center;
+            color: #2e3b4e;
+            margin-bottom: 20px;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label, input {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+        input:focus {
+            border-color: #4CAF50;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e9f7e7;
+            border-radius: 4px;
+            text-align: center;
+            display: none;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>California House Price Prediction</h1>
+        <p>Enter the details below to predict the median house price in California.</p>
+        <form id="prediction-form">
+            <label for="longitude">Longitude (Range: -124.35 to -114.31):</label>
+            <input type="text" id="longitude" name="longitude" placeholder="Enter longitude">
+            <label for="latitude">Latitude (Range: 32.54 to 41.95):</label>
+            <input type="text" id="latitude" name="latitude" placeholder="Enter latitude">
+            <label for="housing_median_age">Housing Median Age (Range: 1 to 52):</label>
+            <input type="text" id="housing_median_age" name="housing_median_age" placeholder="Enter housing median age">
+            <label for="total_rooms">Total Rooms (Range: 2 to 39,320):</label>
+            <input type="text" id="total_rooms" name="total_rooms" placeholder="Enter total rooms">
+            <label for="total_bedrooms">Total Bedrooms (Range: 1 to 6,445):</label>
+            <input type="text" id="total_bedrooms" name="total_bedrooms" placeholder="Enter total bedrooms">
+            <label for="population">Population (Range: 3 to 35,682):</label>
+            <input type="text" id="population" name="population" placeholder="Enter population">
+            <label for="households">Households (Range: 1 to 6,082):</label>
+            <input type="text" id="households" name="households" placeholder="Enter number of households">
+            <label for="median_income">Median Income (Range: 0.5 to 15):</label>
+            <input type="text" id="median_income" name="median_income" placeholder="Enter median income">
+            <button type="button" onclick="predictPrice()">Predict House Price</button>
+        </form>
+
+        <div id="result" class="result">
+            <h3>Predicted House Price: $<span id="price"></span></h3>
+        </div>
+        <div id="error" class="error">Please enter valid numeric values for all fields.</div>
+    </div>
+
+    <script>
+        function validateInput() {
+            const inputs = document.querySelectorAll('input');
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!input.value || isNaN(input.value)) {
+                    isValid = false;
+                }
+            });
+            return isValid;
+        }
+
+        function predictPrice() {
+            if (!validateInput()) {
+                document.getElementById("error").style.display = "block";
+                return;
+            }
+
+            document.getElementById("error").style.display = "none";
+            const predictedPrice = Math.floor(Math.random() * (500000 - 15000) + 15000); // Simulated prediction
+            document.getElementById('price').innerText = predictedPrice.toLocaleString();
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
